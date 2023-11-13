@@ -3,7 +3,9 @@ import { UsuarioLogin } from "../models/UsuarioLogin";
 import { integracaoUsuario } from "../service/Service";
 
 interface AuthContextProps {
-
+  usuario: UsuarioLogin
+  handleLogin(usuario: UsuarioLogin): Promise<void>
+  handleLogout(): void
 }
 
 interface AuthProviderProps {
@@ -23,6 +25,17 @@ export function AuthProvider({children}: AuthProviderProps) {
     token: ''
   })
 
+  function handleLogout() {
+    setUsuario({
+        id: 0,
+        nome: "",
+        usuario: "",
+        senha: "",
+        foto: "",
+        token: ""
+    })
+}
+
   async function handleLogin(userLogin: UsuarioLogin){
     try {
       await integracaoUsuario('/usuarios/logar', userLogin, setUsuario)
@@ -34,7 +47,7 @@ export function AuthProvider({children}: AuthProviderProps) {
   }
 
   return(
-    <AuthContext.Provider value={{}}>
+    <AuthContext.Provider value={{usuario, handleLogin, handleLogout}}>
       {children}
     </AuthContext.Provider>
   )
