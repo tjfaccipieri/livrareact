@@ -1,4 +1,4 @@
-import { MagnifyingGlass, ShoppingCart, User } from '@phosphor-icons/react';
+import { MagnifyingGlass, ShoppingCart } from '@phosphor-icons/react';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
@@ -6,14 +6,14 @@ import { AuthContext } from '../contexts/AuthContext';
 function Navbar() {
   const [haveToken, setHaveToken] = useState(false);
 
-  const {usuario, handleLogout} = useContext(AuthContext)
+  const { usuario, handleLogout } = useContext(AuthContext);
 
   useEffect(() => {
-    setHaveToken(prev => !prev)
-  }, [usuario.token])
+    setHaveToken((prev) => !prev);
+  }, [usuario.token]);
 
   return (
-    <div className="flex justify-around py-4 bg-purple-700 text-white">
+    <div className="flex bg-purple-700 py-4 justify-around   text-white">
       <h2 className="text-2xl font-mono font-bold">
         <Link to="/">Livrareact</Link>
       </h2>
@@ -36,10 +36,13 @@ function Navbar() {
             <span>
               <ShoppingCart weight="fill" size={32} />
             </span>
-            
+
             <Link to="/perfil">
               <span className="w-10 aspect-square flex items-center justify-center rounded-full overflow-hidden border-2">
-                <img src={usuario.foto || 'https://i.imgur.com/0Hpwnjx.png'} alt="" />
+                <img
+                  src={usuario.foto || 'https://i.imgur.com/0Hpwnjx.png'}
+                  alt=""
+                />
               </span>
             </Link>
           </>

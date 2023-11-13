@@ -16,6 +16,7 @@ export const AuthContext = createContext({} as AuthContextProps)
 
 export function AuthProvider({children}: AuthProviderProps) {
 
+
   const [usuario, setUsuario] = useState<UsuarioLogin>({
     id: 0,
     nome: '',
@@ -34,7 +35,7 @@ export function AuthProvider({children}: AuthProviderProps) {
         foto: "",
         token: ""
     })
-}
+  }
 
   async function handleLogin(userLogin: UsuarioLogin){
     try {

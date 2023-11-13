@@ -1,14 +1,27 @@
-import React, { ChangeEvent, useContext, useState } from 'react'
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { Produto } from '../../models/Produto'
 import { useNavigate, useParams } from 'react-router-dom';
-import { postProduto } from '../../service/Service';
+import { getWithoutHeader, postProduto, putProduto } from '../../service/Service';
 import { AuthContext } from '../../contexts/AuthContext';
 
 function FormProduto() {
 
   const [produto, setProduto] = useState<Produto>({} as Produto)
 
-  const {id} = useParams()
+  const {id} = useParams<{id: string}>()
+  // desestruturação
+
+  async function getProdutoById() {
+    try {
+      await getWithoutHeader(`/produtos/${id}`, setProduto)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getProdutoById()
+  }, [id])
 
   const {usuario} = useContext(AuthContext)
 
@@ -25,27 +38,41 @@ function FormProduto() {
   async function handleForm(event: ChangeEvent<HTMLFormElement>){
     event.preventDefault()
 
-    console.log(usuario.token);
-
-    console.log(produto);
-
-    try {
-      await postProduto('/produtos', produto, setProduto, {
-        headers: {
-          Authorization:  usuario.token
-        }
-      })
-    } catch (error) {
-      console.log(error);
-      alert('Falha ao cadastrar o livro')
+    if(id !== undefined) {
+      try {
+        await putProduto('/produtos', produto, setProduto, {
+          headers: {
+            Authorization:  usuario.token
+          }
+        })
+      } catch (error) {
+        console.log(error);
+        alert('Falha ao cadastrar o livro')
+      }
+    } else {
+      try {
+        await postProduto('/produtos', produto, setProduto, {
+          headers: {
+            Authorization:  usuario.token
+          }
+        })
+      } catch (error) {
+        console.log(error);
+        alert('Falha ao cadastrar o livro')
+      }
     }
+    
+
+    
 
     navigate('/perfil')
   }
 
   return (
     <div className='container mx-auto flex flex-col mt-8 min-h-[85vh]'>
-      <h2 className='text-4xl font-black text-purple-900 text-center'>Cadastrar novo livro</h2>
+      <h2 className='text-4xl font-black text-purple-900 text-center'>
+        {id !== undefined ? 'Editar livro' : 'Cadastrar novo livro'}
+      </h2>
       <form className='flex flex-col gap-8' onSubmit={handleForm}>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-1/2 mx-auto mt-8'>
         <div className="flex flex-col">

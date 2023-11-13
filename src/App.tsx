@@ -5,22 +5,23 @@ import Cadastro from './pages/Cadastro';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Perfil from './pages/Perfil';
-import { useContext } from 'react';
-import { AuthContext } from './contexts/AuthContext';
 import FormProduto from './components/produtos/FormProduto';
+import { AuthContext, AuthProvider } from './contexts/AuthContext.tsx'
+import { useContext } from 'react';
 
 function App() {
 
   const {usuario} = useContext(AuthContext)
 
-  function ProtectedRoute({children}: any) {
+  function RotaProtegida({children}: any) {
     if(usuario.token === '') {
+      alert('loga ai')
       return <Navigate to='/login' />
     }
 
     return children
   }
-
+    
   return (
     <BrowserRouter>
       <Navbar />
@@ -29,12 +30,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/perfil" element={<Perfil />} />
-          {/* <Route path="/perfil" element={<ProtectedRoute><Perfil /></ProtectedRoute>} /> */}
-          <Route path="/cadastroProduto" element={<FormProduto />} />
+          <Route path="/cadastroProduto" element={<RotaProtegida><FormProduto /></RotaProtegida>} />
           <Route path="/cadastroProduto/:id" element={<FormProduto />} />
         </Routes>
       <Footer />
     </BrowserRouter>
+    
   );
 }
 

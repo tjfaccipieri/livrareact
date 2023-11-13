@@ -26,6 +26,22 @@ function Perfil() {
     getUserById();
   }, []);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+  //       const data = await response.json();
+  //       setUser(data);
+  //     } catch (error) {
+  //       console.error('Erro ao buscar dados:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [])
+
+  const {nome} = useContext(AuthContext)
+
   return (
     <div className="container mx-auto py-8 flex flex-col gap-4">
       <h2 className="text-center font-black text-4xl font-serif text-purple-900">
@@ -58,9 +74,11 @@ function Perfil() {
             {item.titulo}
           </h3>
           
-          <button className="border-purple-900 border-2 w-11/12 mx-auto rounded hover:bg-purple-900 hover:text-white text-purple-900 font-bold uppercase py-1">
-            Editar
-          </button>
+          <Link to={`/cadastroProduto/${item.id}`}>
+            <button className="border-purple-900 border-2 w-11/12 mx-auto rounded hover:bg-purple-900 hover:text-white text-purple-900 font-bold uppercase py-1">
+              Editar
+            </button>
+          </Link>
           
           <button className="border-red-900 border-2 w-11/12 mx-auto rounded hover:bg-red-900 hover:text-white text-red-900 font-bold uppercase py-1">
             Apagar
