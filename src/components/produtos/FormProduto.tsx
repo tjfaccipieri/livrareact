@@ -72,14 +72,16 @@ function FormProduto() {
         </div>
         <div className="flex flex-col">
           <label htmlFor="sinopse" hidden>sinopse do livro</label>
-          <input
+          {/* <input
             type="text"
             name='sinopse'
             value={produto.sinopse}
             onChange={(event: ChangeEvent<HTMLInputElement>) => handleFields(event)}
             placeholder="sinopse do livro"
             className="border-b-2 border-purple-900  px-2 text-lg py-1 font-lg"
-          />
+          /> */}
+          <textarea name="sinopse" id="sinopse" rows={5} className="border-b-2 border-purple-900  px-2 text-lg py-1 font-lg" placeholder='Sinopse do livro aqui' value={produto.sinopse}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => handleFields(event)}></textarea>
         </div>
         <div className="flex flex-col">
           <label htmlFor="editora" hidden>editora do livro</label>
