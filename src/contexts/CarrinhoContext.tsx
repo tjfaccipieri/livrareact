@@ -1,7 +1,28 @@
-import { createContext } from "react";
+import { ReactNode, createContext, useState } from "react";
+import { Produto } from "../models/Produto";
 
-export const CarrinhoContext = createContext({})
+type CarrinhoContextProps = {
+  listaCarrinho: Array<Produto>
+  insertItem: () => void
+}
 
-export function CarrinhoProvider() {
+interface CarrinhoProviderProps {
+  children: ReactNode
+}
 
+export const CarrinhoContext = createContext({} as CarrinhoContextProps)
+
+export function CarrinhoProvider({children}: CarrinhoProviderProps) {
+
+  const [listaCarrinho, setListaCarrinho] = useState([])
+
+  function insertItem(){
+    
+  }
+
+  return(
+    <CarrinhoContext.Provider value={{listaCarrinho, insertItem}}>
+      {children}
+    </CarrinhoContext.Provider>
+  )
 }

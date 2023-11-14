@@ -6,13 +6,7 @@ import { getWithHeader } from '../service/Service';
 
 function Perfil() {
   const { usuario } = useContext(AuthContext);
-  const navigate = useNavigate();
   const [user, setUser] = useState<Usuario>({} as Usuario);
-  // useEffect(() => {
-  //   if(usuario.token === '') {
-  //     navigate('/login')
-  //   }
-  // }, [])
 
   async function getUserById() {
     await getWithHeader(`/usuarios/${usuario.id}`, setUser, {
@@ -26,26 +20,10 @@ function Perfil() {
     getUserById();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('https://jsonplaceholder.typicode.com/todos');
-  //       const data = await response.json();
-  //       setUser(data);
-  //     } catch (error) {
-  //       console.error('Erro ao buscar dados:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [])
-
-  const {nome} = useContext(AuthContext)
-
   return (
     <div className="container mx-auto py-8 flex flex-col gap-4">
       <h2 className="text-center font-black text-4xl font-serif text-purple-900">
-        Perfil de Thiago Faccipieri
+        Perfil de {usuario.nome}
       </h2>
 
       <div className="flex justify-center gap-28 items-center mt-8">
@@ -74,15 +52,13 @@ function Perfil() {
             {item.titulo}
           </h3>
           
-          <Link to={`/cadastroProduto/${item.id}`}>
-            <button className="border-purple-900 border-2 w-11/12 mx-auto rounded hover:bg-purple-900 hover:text-white text-purple-900 font-bold uppercase py-1">
+          <Link to={`/cadastroProduto/${item.id}`} className="border-purple-900 border-2 w-11/12 mx-auto rounded hover:bg-purple-900 hover:text-white text-purple-900 font-bold uppercase py-1 text-center">
               Editar
-            </button>
           </Link>
           
-          <button className="border-red-900 border-2 w-11/12 mx-auto rounded hover:bg-red-900 hover:text-white text-red-900 font-bold uppercase py-1">
+          <Link to={`apagarProduto/${item.id}`} className="border-red-900 border-2 w-11/12 mx-auto rounded hover:bg-red-900 hover:text-white text-red-900 font-bold uppercase py-1 text-center">
             Apagar
-          </button>
+          </Link>
 
         </div>
         ))}
