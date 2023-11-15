@@ -33,9 +33,9 @@ function Navbar() {
       <div className="flex gap-2 items-center">
         {haveToken ? (
           <>
-            <span>
+            <Link to='/carrinho'>
               <ShoppingCart weight="fill" size={32} />
-            </span>
+            </Link>
 
             <Link to="/perfil">
               <span className="w-10 aspect-square flex items-center justify-center rounded-full overflow-hidden border-2">

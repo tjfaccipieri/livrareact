@@ -56,7 +56,7 @@ function Perfil() {
               Editar
           </Link>
           
-          <Link to={`apagarProduto/${item.id}`} className="border-red-900 border-2 w-11/12 mx-auto rounded hover:bg-red-900 hover:text-white text-red-900 font-bold uppercase py-1 text-center">
+          <Link to={`/deletarProduto/${item.id}`} className="border-red-900 border-2 w-11/12 mx-auto rounded hover:bg-red-900 hover:text-white text-red-900 font-bold uppercase py-1 text-center">
             Apagar
           </Link>
 

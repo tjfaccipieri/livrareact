@@ -9,6 +9,9 @@ import Cadastro from './pages/Cadastro';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Perfil from './pages/Perfil';
+import DeleteProduto from './components/produtos/DeleteProduto.tsx';
+import DetalheProduto from './components/produtos/DetalheProduto.tsx';
+import Carrinho from './components/Carrinho.tsx';
 
 function App() {
   const { usuario } = useContext(AuthContext);
@@ -34,6 +37,9 @@ function App() {
           <Route path="/cadastroProduto" element={ <RotaProtegida> <FormProduto /> </RotaProtegida> }>
             <Route path=":id" element={<FormProduto />} />
           </Route>
+          <Route path="/deletarProduto/:id" element={<DeleteProduto />} />
+          <Route path="/detalheProduto/:id" element={<DetalheProduto />} />
+          <Route path="/carrinho" element={<Carrinho />} />
         </Routes>
         <Footer />
       </BrowserRouter>

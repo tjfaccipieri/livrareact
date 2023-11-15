@@ -40,7 +40,7 @@ export function AuthProvider({children}: AuthProviderProps) {
   async function handleLogin(userLogin: UsuarioLogin){
     try {
       await integracaoUsuario('/usuarios/logar', userLogin, setUsuario)
-      alert('Conectado com sucesso')
+      // alert('Conectado com sucesso')
     } catch (error) {
       console.log(error);
       alert('Falha ao logar, verifique os seus dados')

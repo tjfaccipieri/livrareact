@@ -30,3 +30,7 @@ export const putProduto = async(url: string, dados: object, setDados: Function, 
   const resp = await api.put(url, dados, header)
   setDados(resp.data)
 }
+
+export const deleteProduto = async(url: string, header: object) => {
+  await api.delete(url, header)
+}
