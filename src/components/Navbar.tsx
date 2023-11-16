@@ -2,13 +2,14 @@ import { MagnifyingGlass, ShoppingCart } from '@phosphor-icons/react';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
+import { CarrinhoContext } from '../contexts/CarrinhoContext';
 
 function Navbar() {
   const [haveToken, setHaveToken] = useState(false);
 
   const { usuario, handleLogout } = useContext(AuthContext);
-  // const {listaCarrinho} = useContext(CarrinhoContext)
-  // const itensComprados = listaCarrinho.length
+  const {listaCarrinho} = useContext(CarrinhoContext)
+  const itensComprados = listaCarrinho.length
 
   useEffect(() => {
     setHaveToken((prev) => !prev);
@@ -37,7 +38,7 @@ function Navbar() {
           <>
             <Link to='/carrinho' className='flex relative'>
               <ShoppingCart weight="fill" size={32} />
-              {/* <span className='w-4 h-4 text-xs rounded-full bg-sky-400 flex items-center justify-center absolute right-0'>{itensComprados}</span> */}
+              <span className='w-4 h-4 text-xs rounded-full bg-sky-400 flex items-center justify-center absolute right-0'>{itensComprados}</span>
             </Link>
 
             <Link to="/perfil">

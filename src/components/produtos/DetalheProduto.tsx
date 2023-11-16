@@ -8,7 +8,7 @@ function DetalheProduto() {
 
   const {id} = useParams<{id: string}>()
 
-  // const {insertItem} = useContext(CarrinhoContext)
+  const {insertItem} = useContext(CarrinhoContext)
 
   const [produto, setProduto] = useState<Produto>({} as Produto)
 
@@ -37,7 +37,7 @@ function DetalheProduto() {
 
           <div className='flex justify-between mt-auto'>
             <h3 className='text-2xl font-bold text-sky-800'>Melhor preço: {produto.preco?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</h3>
-            <button className='h-full bg-sky-700 text-white font-bold px-8 rounded-lg hover:bg-sky-900'>Comprar</button>
+            <button onClick={() => insertItem(produto)} className='h-full bg-sky-700 text-white font-bold px-8 rounded-lg hover:bg-sky-900'>Comprar</button>
           </div>
         </div>
       </div>

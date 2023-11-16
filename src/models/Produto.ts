@@ -8,6 +8,6 @@ export interface Produto {
   editora: string;
   preco: number;
   foto: string;
-  usuario: Usuario;
+  usuario: Usuario | null;
   qtd?: number
 }

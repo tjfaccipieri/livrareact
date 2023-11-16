@@ -10,6 +10,8 @@ import Login from './pages/Login';
 import Perfil from './pages/Perfil';
 import DeleteProduto from './components/produtos/DeleteProduto.tsx';
 import DetalheProduto from './components/produtos/DetalheProduto.tsx';
+import { CarrinhoProvider } from './contexts/CarrinhoContext.tsx';
+import Carrinho from './components/Carrinho.tsx';
 
 function App() {
   const { usuario } = useContext(AuthContext);
@@ -24,7 +26,7 @@ function App() {
   }
 
   return (
-    // <CarrinhoProvider>
+    <CarrinhoProvider>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -37,11 +39,11 @@ function App() {
           </Route>
           <Route path="/deletarProduto/:id" element={<DeleteProduto />} />
           <Route path="/detalheProduto/:id" element={<DetalheProduto />} />
-          {/* <Route path="/carrinho" element={<Carrinho />} /> */}
+          <Route path="/carrinho" element={<Carrinho />} />
         </Routes>
         <Footer />
       </BrowserRouter>
-    // </CarrinhoProvider>
+    </CarrinhoProvider>
   );
 }
 
