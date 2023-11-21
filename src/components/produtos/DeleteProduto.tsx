@@ -4,11 +4,15 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { Produto } from '../../models/Produto';
 import { deleteProduto, getWithoutHeader } from '../../service/Service';
 
-function DeleteProduto() {
+interface DeleteProdutoProps {
+  id: number
+}
+
+function DeleteProduto({id}: DeleteProdutoProps) {
   const [produto, setProduto] = useState<Produto>({} as Produto);
   const navigate = useNavigate()
   const { usuario } = useContext(AuthContext);
-  const { id } = useParams<{ id: string }>();
+  // const { id } = useParams<{ id: string }>();
 
   async function getProdutoById() {
     try {

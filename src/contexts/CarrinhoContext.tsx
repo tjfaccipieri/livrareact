@@ -20,7 +20,7 @@ export function CarrinhoProvider({ children }: CarrinhoProviderProps) {
   const [listaCarrinho, setListaCarrinho] = useState<Produto[]>([]);
 
   function insertItem(prod: Produto) {
-    setListaCarrinho((currentItems) => {
+    setListaCarrinho((currentItems: Produto[]) => {
       if (currentItems.find((item) => item.id === prod.id) == null) {
         return [...currentItems, { ...prod, qtd: 1 }];
       } else {
@@ -36,7 +36,7 @@ export function CarrinhoProvider({ children }: CarrinhoProviderProps) {
   }
 
   function decreaseQuantity(prod: Produto) {
-    setListaCarrinho((currentItems) => {
+    setListaCarrinho((currentItems: Produto[]) => {
       if (currentItems.find((item) => item.id === prod.id)?.qtd === 1) {
         return currentItems.filter((item) => item.id !== prod.id);
       } else {
@@ -52,7 +52,7 @@ export function CarrinhoProvider({ children }: CarrinhoProviderProps) {
   }
 
   function removeItem(prod: Produto) {
-    setListaCarrinho((currentItems) => {
+    setListaCarrinho((currentItems: Produto[]) => {
       return currentItems.filter((item) => item.id !== prod.id)
     })
   }
